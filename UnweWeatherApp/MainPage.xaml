@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UnweWeatherApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WeatherApp">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="SkyBlue" />
+            </Style>
+            <Style x:Key="labelResultStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+            <local:LongToDateTimeConverter x:Key="longToDateTimeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <Grid Padding="10,20,10,10" BackgroundColor="SkyBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.ColumnSpan="3"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Search by City"
+                TextColor="White" />
+            <Label
+                Grid.Row="1"
+                Style="{StaticResource labelStyle}"
+                Text="City:"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <Entry
+                x:Name="_cityEntry"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5,0"
+                BackgroundColor="White"
+                Text="Sofia"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="White"
+                BorderColor="White"
+                BorderWidth="1"
+                Clicked="OnGetWeatherButtonClicked"
+                Text="Show Weather"
+                TextColor="Black" />
+        </Grid>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label Style="{StaticResource labelStyle}" Text="Location" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding City.Name}" />
+                <Label Style="{StaticResource labelStyle}" Text="Temperature" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding Temp}" />
+                <Label Style="{StaticResource labelStyle}" Text="Wind Speed" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding Wind.Speed}" />
+                <Label Style="{StaticResource labelStyle}" Text="Humidity" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding Humidity}" />
+                <Label Style="{StaticResource labelStyle}" Text="Visibility" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding List.Visibility}" />
+                <Label Style="{StaticResource labelStyle}" Text="Time of Sunrise" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding City.Sunrise, Converter={StaticResource longToDateTimeConverter}}" />
+                <Label Style="{StaticResource labelStyle}" Text="Time of Sunset" />
+                <Label Style="{StaticResource labelResultStyle}" Text="{Binding City.Sunset, Converter={StaticResource longToDateTimeConverter}}" />
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+
+</ContentPage>
